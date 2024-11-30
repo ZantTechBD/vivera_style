@@ -1,23 +1,21 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { backendUrl, currency } from '../App'
 import { toast } from 'react-toastify'
 
 const List = ({ token }) => {
-
   const [list, setList] = useState([])
+  const navigate = useNavigate(); // Initialize navigate function
 
   const fetchList = async () => {
     try {
-
       const response = await axios.get(backendUrl + '/api/product/list')
       if (response.data.success) {
         setList(response.data.products.reverse());
-      }
-      else {
+      } else {
         toast.error(response.data.message)
       }
-
     } catch (error) {
       console.log(error)
       toast.error(error.message)
@@ -26,16 +24,13 @@ const List = ({ token }) => {
 
   const removeProduct = async (id) => {
     try {
-
       const response = await axios.post(backendUrl + '/api/product/remove', { id }, { headers: { token } })
-
       if (response.data.success) {
         toast.success(response.data.message)
         await fetchList();
       } else {
         toast.error(response.data.message)
       }
-
     } catch (error) {
       console.log(error)
       toast.error(error.message)
@@ -70,7 +65,20 @@ const List = ({ token }) => {
               <p>{item.name}</p>
               <p>{item.category}</p>
               <p>{currency}{item.price}</p>
-              <p onClick={()=>removeProduct(item._id)} className='text-right md:text-center cursor-pointer text-lg'>X</p>
+              <div className='flex justify-end md:justify-center gap-2'>
+                <span
+                  onClick={() => navigate(`/edit/${item._id}`)} // Navigate to the edit page
+                  className="cursor-pointer text-lg text-blue-600"
+                >
+                  ✏️
+                </span>
+                <span 
+                  onClick={() => removeProduct(item._id)} 
+                  className='cursor-pointer text-lg text-red-600'
+                >
+                  X
+                </span>
+              </div>
             </div>
           ))
         }

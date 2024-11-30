@@ -86,4 +86,47 @@ const singleProduct = async (req, res) => {
     }
 }
 
-export { listProducts, addProduct, removeProduct, singleProduct }
+const editProduct = async (req, res) => {
+    try {
+      const { productId, name, description, price, category, subCategory, sizes, bestseller } = req.body;
+  
+      const image1 = req.files.image1 && req.files.image1[0];
+      const image2 = req.files.image2 && req.files.image2[0];
+      const image3 = req.files.image3 && req.files.image3[0];
+      const image4 = req.files.image4 && req.files.image4[0];
+  
+      const images = [image1, image2, image3, image4].filter((item) => item !== undefined);
+  
+      let imagesUrl = [];
+      if (images.length > 0) {
+        imagesUrl = await Promise.all(
+          images.map(async (item) => {
+            const result = await cloudinary.uploader.upload(item.path, { resource_type: 'image' });
+            return result.secure_url;
+          })
+        );
+      }
+  
+      const updatedData = {
+        ...(name && { name }),
+        ...(description && { description }),
+        ...(category && { category }),
+        ...(price && { price: Number(price) }),
+        ...(subCategory && { subCategory }),
+        ...(bestseller !== undefined && { bestseller: bestseller === 'true' }),
+        ...(sizes && { sizes: JSON.parse(sizes) }),
+        ...(imagesUrl.length > 0 && { image: imagesUrl }),
+        date: Date.now() // Update the modification date
+      };
+  
+      await productModel.findByIdAndUpdate(productId, updatedData, { new: true });
+  
+      res.json({ success: true, message: 'Product updated successfully' });
+    } catch (error) {
+      console.log(error);
+      res.json({ success: false, message: error.message });
+    }
+  };
+  
+
+export { listProducts, addProduct, removeProduct, singleProduct, editProduct }
