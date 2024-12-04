@@ -68,7 +68,6 @@ const Edit = ({ token }) => {
     try {
       const formData = new FormData();
   
-      // Append product details to formData
       formData.append("productId", id);
       formData.append("name", name);
       formData.append("description", description);
@@ -78,25 +77,21 @@ const Edit = ({ token }) => {
       formData.append("bestseller", bestseller);
       formData.append("sizes", JSON.stringify(sizes));
   
-      // Append updated images if available
       image1 && formData.append("image1", image1);
       image2 && formData.append("image2", image2);
       image3 && formData.append("image3", image3);
       image4 && formData.append("image4", image4);
   
-      // Log formData entries for debugging
       for (let [key, value] of formData.entries()) {
         console.log(`${key}:`, value);
       }
   
-      // Make API call to update the product
       const response = await axios.post(
         `${backendUrl}/api/product/edit`,
         formData,
         { headers: { token } }
       );
   
-      // Handle the response
       if (response.data.success) {
         toast.success("Product updated successfully!");
       } else {
@@ -104,7 +99,7 @@ const Edit = ({ token }) => {
       }
     } catch (error) {
       console.error("Error updating product:", error);
-      toast.error("Error updating product");
+      toast.error("Error updating product"); 
     }
   };
   

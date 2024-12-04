@@ -9,9 +9,13 @@ const productSchema = new mongoose.Schema({
     subCategory: { type: String, required: true },
     sizes: { type: Array, required: true },
     bestseller: { type: Boolean },
-    date: { type: Number, required: true }
-})
+    date: { type: Number, required: true },
+    rating: {
+        average: { type: Number, default: 0, min: 0, max: 5 }, 
+        count: { type: Number, default: 0 } 
+    }
+});
 
-const productModel  = mongoose.models.product || mongoose.model("product",productSchema);
+const productModel = mongoose.models.product || mongoose.model("product", productSchema);
 
-export default productModel
+export default productModel;
