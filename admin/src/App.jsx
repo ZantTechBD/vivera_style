@@ -1,33 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import Navbar from './components/Navbar';
-import Sidebar from './components/Sidebar';
-import { Routes, Route } from 'react-router-dom';
-import Add from './pages/Add';
-import List from './pages/List';
-import Orders from './pages/Orders';
-import Login from './components/Login';
-import Edit from './pages/Edit'; // Import the Edit page
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useEffect, useState } from "react";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
+import { Routes, Route } from "react-router-dom";
+import Add from "./pages/Add";
+import List from "./pages/List";
+import Orders from "./pages/Orders";
+import Login from "./components/Login";
+import Edit from "./pages/Edit"; // Import the Edit page
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const backendUrl = import.meta.env.VITE_BACKEND_URL;
-export const currency = '$';
+export const currency = "$";
 
 const App = () => {
   const [token, setToken] = useState(
-    localStorage.getItem('token') ? localStorage.getItem('token') : ''
+    localStorage.getItem("token") ? localStorage.getItem("token") : ""
   );
 
   useEffect(() => {
-    localStorage.setItem('token', token);
+    localStorage.setItem("token", token);
   }, [token]);
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-white-50 min-h-screen">
       <ToastContainer />
-      {token === ''
-        ? <Login setToken={setToken} />
-        : <>
+      {token === "" ? (
+        <Login setToken={setToken} />
+      ) : (
+        <>
           <Navbar setToken={setToken} />
           <hr />
           <div className="flex w-full">
@@ -42,7 +43,7 @@ const App = () => {
             </div>
           </div>
         </>
-      }
+      )}
     </div>
   );
 };
