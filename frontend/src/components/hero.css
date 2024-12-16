@@ -1,0 +1,8 @@
+.hero-container {
+  height: 500px;
+}
+@media (max-width: 640px) {
+  .hero-container {
+    height: auto;
+  }
+}

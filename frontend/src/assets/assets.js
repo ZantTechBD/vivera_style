@@ -94,6 +94,8 @@ export const assets = {
   stripe_logo,
   cross_icon,
   vivera_logo,
+  p_img2_1,
+  p_img3
 };
 
 export const products = [
