@@ -52,7 +52,10 @@ const Hero = () => {
         </div>
       </div>
       {/* Hero Right Side with Image Slider */}
-      <div className="w-full sm:w-1/2 relative h-[300px] sm:h-auto overflow-hidden">
+      <div
+        className="w-full sm:w-1/2 relative h-[300px] sm:h-auto overflow-hidden"
+        style={{ zIndex: -10 }}
+      >
         {images.map((image, index) => (
           <img
             key={index}

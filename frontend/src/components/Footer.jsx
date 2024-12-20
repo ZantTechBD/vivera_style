@@ -42,7 +42,7 @@ const Footer = () => {
           <ul className="flex flex-col gap-1 text-gray-600">
             <li>
               <a href="tel:+12124567890" className="hover:underline">
-                +1-212-456-7890
+                +880123122512
               </a>
             </li>
             <li>
@@ -50,7 +50,7 @@ const Footer = () => {
                 href="mailto:contact@foreveryou.com"
                 className="hover:underline"
               >
-                contact@foreveryou.com
+                contact@vivera_style.com
               </a>
             </li>
           </ul>
@@ -60,7 +60,7 @@ const Footer = () => {
       <div>
         <hr />
         <p className="py-5 text-sm text-center">
-          Copyright 2024@ forever.com - All Right Reserved.
+          Copyright 2024@ vivera_style.com - All Right Reserved.
         </p>
       </div>
     </div>
