@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { ShopContext } from '../context/ShopContext';
+import React, { useContext, useEffect, useState } from "react";
+import { ShopContext } from "../context/ShopContext";
 
 const MyProfile = () => {
   const { token, navigate } = useContext(ShopContext);
@@ -7,17 +7,17 @@ const MyProfile = () => {
 
   useEffect(() => {
     if (!token) {
-      navigate('/login');
+      navigate("/login");
     } else {
       // Simulate fetching user data. Replace with your API call if needed.
       const fetchUserData = async () => {
         // Simulating an API call
         const mockData = {
-          name: 'John Doe',
-          email: 'johndoe@example.com',
-          phone: '+1234567890',
-          address: '123 Main Street, Springfield',
-          joinedDate: '2023-01-01',
+          name: "John Doe",
+          email: "johndoe@example.com",
+          phone: "+1234567890",
+          address: "123 Main Street, Springfield",
+          joinedDate: "2023-01-01",
         };
         setUserData(mockData);
       };
@@ -27,7 +27,11 @@ const MyProfile = () => {
   }, [token, navigate]);
 
   if (!userData) {
-    return <div className="flex items-center justify-center h-screen">Loading...</div>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        Loading...
+      </div>
+    );
   }
 
   return (
@@ -57,7 +61,7 @@ const MyProfile = () => {
       </div>
       <button
         className="mt-6 w-full py-2 bg-black text-white rounded-lg hover:bg-gray-800"
-        onClick={() => navigate('/')}
+        onClick={() => navigate("/")}
       >
         Back to Home
       </button>

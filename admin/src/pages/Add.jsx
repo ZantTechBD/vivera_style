@@ -9,6 +9,10 @@ const Add = ({ token }) => {
   const [image2, setImage2] = useState(false);
   const [image3, setImage3] = useState(false);
   const [image4, setImage4] = useState(false);
+  const [image5, setImage5] = useState(false);
+  const [image6, setImage6] = useState(false);
+  const [image7, setImage7] = useState(false);
+  const [image8, setImage8] = useState(false);
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -42,6 +46,10 @@ const Add = ({ token }) => {
       image2 && formData.append("image2", image2);
       image3 && formData.append("image3", image3);
       image4 && formData.append("image4", image4);
+      image5 && formData.append("image5", image5);
+      image6 && formData.append("image6", image6);
+      image7 && formData.append("image7", image7);
+      image8 && formData.append("image8", image8);
 
       const response = await axios.post(
         backendUrl + "/api/product/add",
@@ -57,10 +65,14 @@ const Add = ({ token }) => {
         setImage2(false);
         setImage3(false);
         setImage4(false);
+        setImage5(false);
+        setImage6(false);
+        setImage7(false);
+        setImage8(false);
         setPrice("");
+        setCustomId("");
       } else {
         toast.error(response.data.message);
-        console.log("hello");
       }
     } catch (error) {
       console.log(error);
@@ -129,11 +141,63 @@ const Add = ({ token }) => {
               hidden
             />
           </label>
+          <label htmlFor="image5">
+            <img
+              className="w-20"
+              src={!image5 ? assets.upload_area : URL.createObjectURL(image5)}
+              alt=""
+            />
+            <input
+              onChange={(e) => setImage5(e.target.files[0])}
+              type="file"
+              id="image5"
+              hidden
+            />
+          </label>
+          <label htmlFor="image6">
+            <img
+              className="w-20"
+              src={!image6 ? assets.upload_area : URL.createObjectURL(image6)}
+              alt=""
+            />
+            <input
+              onChange={(e) => setImage6(e.target.files[0])}
+              type="file"
+              id="image6"
+              hidden
+            />
+          </label>
+          <label htmlFor="image7">
+            <img
+              className="w-20"
+              src={!image7 ? assets.upload_area : URL.createObjectURL(image7)}
+              alt=""
+            />
+            <input
+              onChange={(e) => setImage7(e.target.files[0])}
+              type="file"
+              id="image7"
+              hidden
+            />
+          </label>
+          <label htmlFor="image8">
+            <img
+              className="w-20"
+              src={!image8 ? assets.upload_area : URL.createObjectURL(image8)}
+              alt=""
+            />
+            <input
+              onChange={(e) => setImage8(e.target.files[0])}
+              type="file"
+              id="image8"
+              hidden
+            />
+          </label>
         </div>
       </div>
 
       <div className="w-full">
-        <p className="mb-2">Product Custom Id</p>
+        <p className="mb-2">Product Code</p>
         <input
           onChange={(e) => setCustomId(e.target.value)}
           value={customId}
@@ -399,6 +463,108 @@ const Add = ({ token }) => {
               } px-3 py-1 cursor-pointer`}
             >
               Yellow
+            </p>
+          </div>
+          <div
+            onClick={() =>
+              setColor((prev) =>
+                prev.includes("Black")
+                  ? prev.filter((item) => item !== "Black")
+                  : [...prev, "Black"]
+              )
+            }
+          >
+            <p
+              className={`${
+                color.includes("Black") ? "bg-pink-100" : "bg-slate-200"
+              } px-3 py-1 cursor-pointer`}
+            >
+              Black
+            </p>
+          </div>
+          <div
+            onClick={() =>
+              setColor((prev) =>
+                prev.includes("Purple")
+                  ? prev.filter((item) => item !== "Purple")
+                  : [...prev, "Purple"]
+              )
+            }
+          >
+            <p
+              className={`${
+                color.includes("Purple") ? "bg-pink-100" : "bg-slate-200"
+              } px-3 py-1 cursor-pointer`}
+            >
+              Purple
+            </p>
+          </div>
+          <div
+            onClick={() =>
+              setColor((prev) =>
+                prev.includes("White")
+                  ? prev.filter((item) => item !== "White")
+                  : [...prev, "White"]
+              )
+            }
+          >
+            <p
+              className={`${
+                color.includes("White") ? "bg-pink-100" : "bg-slate-200"
+              } px-3 py-1 cursor-pointer`}
+            >
+              White
+            </p>
+          </div>
+          <div
+            onClick={() =>
+              setColor((prev) =>
+                prev.includes("Brown")
+                  ? prev.filter((item) => item !== "Brown")
+                  : [...prev, "Brown"]
+              )
+            }
+          >
+            <p
+              className={`${
+                color.includes("Brown") ? "bg-pink-100" : "bg-slate-200"
+              } px-3 py-1 cursor-pointer`}
+            >
+              Brown
+            </p>
+          </div>
+          <div
+            onClick={() =>
+              setColor((prev) =>
+                prev.includes("Pink")
+                  ? prev.filter((item) => item !== "Pink")
+                  : [...prev, "Pink"]
+              )
+            }
+          >
+            <p
+              className={`${
+                color.includes("Pink") ? "bg-pink-100" : "bg-slate-200"
+              } px-3 py-1 cursor-pointer`}
+            >
+              Pink
+            </p>
+          </div>
+          <div
+            onClick={() =>
+              setColor((prev) =>
+                prev.includes("Ash")
+                  ? prev.filter((item) => item !== "Ash")
+                  : [...prev, "Ash"]
+              )
+            }
+          >
+            <p
+              className={`${
+                color.includes("Ash") ? "bg-pink-100" : "bg-slate-200"
+              } px-3 py-1 cursor-pointer`}
+            >
+              Ash
             </p>
           </div>
         </div>

@@ -16,9 +16,14 @@ const ShopContextProvider = (props) => {
   const [token, setToken] = useState("");
   const navigate = useNavigate();
 
-  const addToCart = async (itemId, size) => {
+  const addToCart = async (itemId, size, color) => {
     if (!size) {
       toast.error("Select Product Size");
+      return;
+    }
+
+    if (!color) {
+      toast.error("Select Product Color");
       return;
     }
 
@@ -43,6 +48,7 @@ const ShopContextProvider = (props) => {
           { itemId, size },
           { headers: { token } }
         );
+        toast.success("Successfully Added to the Cart");
       } catch (error) {
         console.log(error);
         toast.error(error.message);

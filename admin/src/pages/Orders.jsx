@@ -83,14 +83,22 @@ const Orders = ({ token }) => {
                     return (
                       <p className="py-0.5" key={index}>
                         {" "}
-                        {item.name} x {item.quantity} <span> {item.size} </span>{" "}
+                        {item.name} x {item.quantity}{" "}
+                        <span>
+                          {" "}
+                          {item.size} {item.color}{" "}
+                        </span>{" "}
                       </p>
                     );
                   } else {
                     return (
                       <p className="py-0.5" key={index}>
                         {" "}
-                        {item.name} x {item.quantity} <span> {item.size} </span>{" "}
+                        {item.name} x {item.quantity}{" "}
+                        <span>
+                          {" "}
+                          {item.size} {item.color}{" "}
+                        </span>{" "}
                         ,
                       </p>
                     );

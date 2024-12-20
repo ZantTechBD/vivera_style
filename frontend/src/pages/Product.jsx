@@ -90,6 +90,9 @@ const Product = () => {
             {currency}
             {productData.price}
           </p>
+          <p className="mt-3 text-gray-600 md:w-4/5">
+            Product Code: {productData.customId}
+          </p>
           <p
             className="mt-5 text-gray-500 md:w-4/5"
             style={{ whiteSpace: "pre-wrap" }}
@@ -129,7 +132,7 @@ const Product = () => {
             </div>
           </div>
           <button
-            onClick={() => addToCart(productData._id, size)}
+            onClick={() => addToCart(productData._id, size, color)}
             className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700"
           >
             ADD TO CART
