@@ -14,8 +14,8 @@ const Edit = ({ token }) => {
   const [image4, setImage4] = useState(null);
   const [image5, setImage5] = useState(false);
   const [image6, setImage6] = useState(false);
-  const [image7, setImage7] = useState(false);
-  const [image8, setImage8] = useState(false);
+  // const [image7, setImage7] = useState(false);
+  // const [image8, setImage8] = useState(false);
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -66,8 +66,8 @@ const Edit = ({ token }) => {
           setImage4(images[3] || null);
           setImage5(images[4] || null);
           setImage6(images[5] || null);
-          setImage7(images[6] || null);
-          setImage8(images[7] || null);
+          // setImage7(images[6] || null);
+          // setImage8(images[7] || null);
         } else {
           toast.error(response.data.message);
         }
@@ -104,8 +104,8 @@ const Edit = ({ token }) => {
       image4 && formData.append("image4", image4);
       image5 && formData.append("image5", image5);
       image6 && formData.append("image6", image6);
-      image7 && formData.append("image7", image7);
-      image8 && formData.append("image8", image8);
+      // image7 && formData.append("image7", image7);
+      // image8 && formData.append("image8", image8);
 
       for (let [key, value] of formData.entries()) {
         console.log(`${key}:`, value);
@@ -136,7 +136,7 @@ const Edit = ({ token }) => {
       <div>
         <p className="mb-2">Upload Images</p>
         <div className="flex gap-2">
-          {[image1, image2, image3, image4, image5, image6, image7, image8].map(
+          {[image1, image2, image3, image4, image5, image6].map(
             (img, index) => (
               <label key={index} htmlFor={`image${index + 1}`}>
                 <img
@@ -153,8 +153,8 @@ const Edit = ({ token }) => {
                       setImage4,
                       setImage5,
                       setImage6,
-                      setImage7,
-                      setImage8,
+                      // setImage7,
+                      // setImage8,
                     ][index];
                     setImageFn(e.target.files[0]);
                   }}

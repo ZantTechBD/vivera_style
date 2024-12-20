@@ -41,8 +41,8 @@ const addProduct = async (req, res) => {
     const image4 = req.files?.image4?.[0];
     const image5 = req.files?.image5?.[0];
     const image6 = req.files?.image6?.[0];
-    const image7 = req.files?.image7?.[0];
-    const image8 = req.files?.image8?.[0];
+    // const image7 = req.files?.image7?.[0];
+    // const image8 = req.files?.image8?.[0];
     const images = [
       image1,
       image2,
@@ -50,8 +50,8 @@ const addProduct = async (req, res) => {
       image4,
       image5,
       image6,
-      image7,
-      image8,
+      //   image7,
+      //   image8,
     ].filter(Boolean);
 
     // Upload images to Cloudinary
@@ -181,8 +181,8 @@ const editProduct = async (req, res) => {
     const image4 = req.files?.image4?.[0];
     const image5 = req.files?.image5?.[0];
     const image6 = req.files?.image6?.[0];
-    const image7 = req.files?.image7?.[0];
-    const image8 = req.files?.image8?.[0];
+    // const image7 = req.files?.image7?.[0];
+    // const image8 = req.files?.image8?.[0];
     const images = [
       image1,
       image2,
@@ -190,8 +190,8 @@ const editProduct = async (req, res) => {
       image4,
       image5,
       image6,
-      image7,
-      image8,
+      //   image7,
+      //   image8,
     ].filter(Boolean);
 
     let imagesUrl = product.image;
@@ -242,12 +242,10 @@ const rateProduct = async (req, res) => {
 
     // Validate input
     if (!productId || userRating === undefined) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Product ID and rating are required.",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Product ID and rating are required.",
+      });
     }
 
     if (userRating < 0 || userRating > 5) {

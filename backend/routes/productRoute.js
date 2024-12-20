@@ -22,8 +22,8 @@ productRouter.post(
     { name: "image4", maxCount: 1 },
     { name: "image5", maxCount: 1 },
     { name: "image6", maxCount: 1 },
-    { name: "image7", maxCount: 1 },
-    { name: "image8", maxCount: 1 },
+    // { name: "image7", maxCount: 1 },
+    // { name: "image8", maxCount: 1 },
   ]),
   addProduct
 );
@@ -37,8 +37,8 @@ productRouter.post(
     { name: "image4", maxCount: 1 },
     { name: "image5", maxCount: 1 },
     { name: "image6", maxCount: 1 },
-    { name: "image7", maxCount: 1 },
-    { name: "image8", maxCount: 1 },
+    // { name: "image7", maxCount: 1 },
+    // { name: "image8", maxCount: 1 },
   ]),
   editProduct
 );
