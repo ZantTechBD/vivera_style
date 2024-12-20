@@ -4,10 +4,10 @@ import productModel from "../models/productModel.js";
 // Function to add a product
 const addProduct = async (req, res) => {
     try {
-        const { name, description, price, category, subCategory, sizes, bestseller } = req.body;
+        const { name, description, price, category, subCategory, sizes, bestseller,rating, color, customId } = req.body;
 
         // Validate required fields
-        if (!name || !description || !price || !category || !subCategory || !sizes) {
+        if (!name || !description || !price || !category || !subCategory || !sizes || !rating || !color || !customId) {
             return res.status(400).json({ success: false, message: "All fields are required." });
         }
 
@@ -26,7 +26,6 @@ const addProduct = async (req, res) => {
                 imagesUrl.push(result.secure_url);
             }
         } catch (uploadError) {
-            // Rollback uploaded images if any fail
             for (const url of imagesUrl) {
                 const publicId = url.split('/').pop().split('.')[0];
                 await cloudinary.uploader.destroy(publicId);
@@ -43,12 +42,13 @@ const addProduct = async (req, res) => {
             subCategory,
             bestseller: bestseller === "true",
             sizes: JSON.parse(sizes),
+            color: JSON.parse(color),
+            customId,
             image: imagesUrl,
             date: Date.now(),
-            rating: { average: 0, count: 0 },  // Initialize rating with default values
+            rating: { average: 0, count: 0 },
         };
 
-        // Save product to the database
         const product = new productModel(productData);
         await product.save();
 
@@ -99,7 +99,7 @@ const singleProduct = async (req, res) => {
 // Function to edit a product
 const editProduct = async (req, res) => {
     try {
-        const { productId, name, description, price, category, subCategory, sizes, bestseller } = req.body;
+        const { productId, name, description, price, category, subCategory, sizes, bestseller,rating,color, customId } = req.body;
 
         // Validate productId
         if (!productId) {
@@ -119,7 +119,7 @@ const editProduct = async (req, res) => {
         const image4 = req.files?.image4?.[0];
         const images = [image1, image2, image3, image4].filter(Boolean);
 
-        let imagesUrl = product.image; // Use existing images if no new ones are uploaded
+        let imagesUrl = product.image;
         if (images.length > 0) {
             try {
                 imagesUrl = await Promise.all(
@@ -142,11 +142,13 @@ const editProduct = async (req, res) => {
             ...(subCategory && { subCategory }),
             ...(bestseller !== undefined && { bestseller: bestseller === "true" }),
             ...(sizes && { sizes: JSON.parse(sizes) }),
+            ...(color && { color: JSON.parse(color) }),
+            ...(customId && { customId }),
+            ...(rating && {rating}),
             ...(imagesUrl && { image: imagesUrl }),
             date: Date.now(),
         };
 
-        // Save updated product
         await productModel.findByIdAndUpdate(productId, updatedData, { new: true });
 
         res.json({ success: true, message: "Product updated successfully" });
@@ -156,37 +158,4 @@ const editProduct = async (req, res) => {
     }
 };
 
-// Function to update product rating
-const updateRating = async (req, res) => {
-    try {
-        const { productId, rating } = req.body;
-
-        // Validate inputs
-        if (!productId || rating === undefined) {
-            return res.status(400).json({ success: false, message: "Product ID and rating are required." });
-        }
-        if (rating < 0 || rating > 5) {
-            return res.status(400).json({ success: false, message: "Rating must be between 0 and 5." });
-        }
-
-        // Find product
-        const product = await productModel.findById(productId);
-        if (!product) {
-            return res.status(404).json({ success: false, message: "Product not found." });
-        }
-
-        // Update rating
-        const newCount = product.rating.count + 1;
-        const newAverage = (product.rating.average * product.rating.count + rating) / newCount;
-
-        product.rating = { average: newAverage, count: newCount };
-        await product.save();
-
-        res.json({ success: true, message: "Rating updated successfully", rating: product.rating });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: error.message });
-    }
-};
-
-export { listProducts, addProduct, removeProduct, singleProduct, editProduct, updateRating };
+export { listProducts, addProduct, removeProduct, singleProduct, editProduct };

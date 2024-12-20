@@ -6,7 +6,8 @@ import RelatedProducts from "../components/RelatedProducts";
 
 const Product = () => {
   const { productId } = useParams();
-  const { products, currency, addToCart, submitRating } = useContext(ShopContext); // Assuming `submitRating` is available
+  const { products, currency, addToCart, submitRating } =
+    useContext(ShopContext); // Assuming `submitRating` is available
   const [productData, setProductData] = useState(null);
   const [image, setImage] = useState("");
   const [size, setSize] = useState("");
@@ -27,10 +28,10 @@ const Product = () => {
       try {
         // Assuming submitRating updates the product's rating on the server and returns the updated product
         const updatedProduct = await submitRating(productId, userRating);
-        
+
         // Update product state with the new rating
         setProductData(updatedProduct);
-        
+
         // Reset user's rating input
         setUserRating(0);
       } catch (error) {
@@ -88,7 +89,12 @@ const Product = () => {
             {currency}
             {productData.price}
           </p>
-          <p className="mt-5 text-gray-500 md:w-4/5">{productData.description}</p>
+          <p
+            className="mt-5 text-gray-500 md:w-4/5"
+            style={{ whiteSpace: "pre-wrap" }}
+          >
+            {productData.description}
+          </p>
           <div className="flex flex-col gap-4 my-8">
             <p>Select Size</p>
             <div className="flex gap-2">
