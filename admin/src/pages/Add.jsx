@@ -18,6 +18,7 @@ const Add = ({ token }) => {
   const [bestseller, setBestseller] = useState(false);
   const [sizes, setSizes] = useState([]);
   const [color, setColor] = useState([]);
+  const [customId, setCustomId] = useState("");
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -33,6 +34,7 @@ const Add = ({ token }) => {
       formData.append("bestseller", bestseller);
       formData.append("sizes", JSON.stringify(sizes));
       formData.append("color", JSON.stringify(color));
+      formData.append("customId", customId);
 
       image1 && formData.append("image1", image1);
       image2 && formData.append("image2", image2);
@@ -54,8 +56,10 @@ const Add = ({ token }) => {
         setImage3(false);
         setImage4(false);
         setPrice("");
+        setCustomId("");
       } else {
         toast.error(response.data.message);
+        console.log("hello");
       }
     } catch (error) {
       console.log(error);
@@ -125,6 +129,18 @@ const Add = ({ token }) => {
             />
           </label>
         </div>
+      </div>
+
+      <div className="w-full">
+        <p className="mb-2">Product Custom Id</p>
+        <input
+          onChange={(e) => setCustomId(e.target.value)}
+          value={customId}
+          className="w-full max-w-[500px] px-3 py-2"
+          type="text"
+          placeholder="Type here"
+          required
+        />
       </div>
 
       <div className="w-full">
