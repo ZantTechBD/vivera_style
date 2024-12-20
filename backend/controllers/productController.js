@@ -235,4 +235,42 @@ const editProduct = async (req, res) => {
   }
 };
 
-export { listProducts, addProduct, removeProduct, singleProduct, editProduct };
+// Function to rate a product
+const rateProduct = async (req, res) => {
+    try {
+        const { productId, userRating } = req.body;
+
+        // Validate input
+        if (!productId || userRating === undefined) {
+            return res.status(400).json({ success: false, message: "Product ID and rating are required." });
+        }
+
+        if (userRating < 0 || userRating > 5) {
+            return res.status(400).json({ success: false, message: "Rating must be between 0 and 5." });
+        }
+
+        // Find the product
+        const product = await productModel.findById(productId);
+        if (!product) {
+            return res.status(404).json({ success: false, message: "Product not found." });
+        }
+
+        // Calculate the new average rating
+        const totalRatings = product.rating.count * product.rating.average + userRating;
+        const newCount = product.rating.count + 1;
+        const newAverage = totalRatings / newCount;
+
+        // Update the product's rating
+        product.rating.average = newAverage;
+        product.rating.count = newCount;
+        await product.save();
+
+        res.json({ success: true, message: "Rating submitted successfully.", rating: product.rating });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+};
+
+
+export { listProducts, addProduct, removeProduct, singleProduct, editProduct, rateProduct };
