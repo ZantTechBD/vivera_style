@@ -19,6 +19,7 @@ const Add = ({ token }) => {
   const [sizes, setSizes] = useState([]);
   const [color, setColor] = useState([]);
   const [customId, setCustomId] = useState("");
+  const [rating, setRating] = useState(0);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -35,6 +36,7 @@ const Add = ({ token }) => {
       formData.append("sizes", JSON.stringify(sizes));
       formData.append("color", JSON.stringify(color));
       formData.append("customId", customId);
+      formData.append("rating", rating);
 
       image1 && formData.append("image1", image1);
       image2 && formData.append("image2", image2);
@@ -56,7 +58,6 @@ const Add = ({ token }) => {
         setImage3(false);
         setImage4(false);
         setPrice("");
-        setCustomId("");
       } else {
         toast.error(response.data.message);
         console.log("hello");
