@@ -18,25 +18,26 @@ const About = () => {
         />
         <div className="flex flex-col justify-center gap-6 md:w-2/4 text-gray-600">
           <p>
-            Forever was born out of a passion for innovation and a desire to
-            revolutionize the way people shop online. Our journey began with a
-            simple idea: to provide a platform where customers can easily
-            discover, explore, and purchase a wide range of products from the
-            comfort of their homes.
+            Welcome to Vivera Style, where fashion meets individuality. Our
+            mission is to craft unique, high-quality designs that empower you to
+            express your personality through every outfit.
           </p>
           <p>
-            Since our inception, we've worked tirelessly to curate a diverse
-            selection of high-quality products that cater to every taste and
-            preference. From fashion and beauty to electronics and home
-            essentials, we offer an extensive collection sourced from trusted
-            brands and suppliers.
+            Founded with a passion for style and a commitment to excellence, we
+            pride ourselves on offering collections that cater to every occasion
+            – from casual chic to elegant sophistication. Each piece is
+            thoughtfully designed to blend comfort, durability, and trendsetting
+            aesthetics, ensuring you look and feel your best every day.
           </p>
           <b className="text-gray-800">Our Mission</b>
           <p>
-            Our mission at Forever is to empower customers with choice,
-            convenience, and confidence. We're dedicated to providing a seamless
-            shopping experience that exceeds expectations, from browsing and
-            ordering to delivery and beyond.
+            At Vivera Style, our mission is to empower individuals to express
+            their unique identities through fashion. We are dedicated to
+            creating high-quality, stylish, and inclusive clothing that inspires
+            confidence and celebrates diversity. With a focus on innovation,
+            sustainability, and exceptional customer experiences, we strive to
+            redefine how fashion enhances everyday life while leaving a positive
+            impact on the world.
           </p>
         </div>
       </div>
