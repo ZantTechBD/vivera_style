@@ -17,6 +17,7 @@ const Add = ({ token }) => {
   const [subCategory, setSubCategory] = useState("Topwear");
   const [bestseller, setBestseller] = useState(false);
   const [sizes, setSizes] = useState([]);
+  const [color, setColor] = useState([]);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -31,6 +32,7 @@ const Add = ({ token }) => {
       formData.append("subCategory", subCategory);
       formData.append("bestseller", bestseller);
       formData.append("sizes", JSON.stringify(sizes));
+      formData.append("color", JSON.stringify(color));
 
       image1 && formData.append("image1", image1);
       image2 && formData.append("image2", image2);
@@ -305,6 +307,84 @@ const Add = ({ token }) => {
             </div>
           </div>
         )}
+      </div>
+
+      <div>
+        <p className="mb-2">Product Colors</p>
+
+        <div className="flex gap-3">
+          <div
+            onClick={() =>
+              setColor((prev) =>
+                prev.includes("Green")
+                  ? prev.filter((item) => item !== "Green")
+                  : [...prev, "Green"]
+              )
+            }
+          >
+            <p
+              className={`${
+                color.includes("Green") ? "bg-pink-100" : "bg-slate-200"
+              } px-3 py-1 cursor-pointer`}
+            >
+              Green
+            </p>
+          </div>
+
+          <div
+            onClick={() =>
+              setColor((prev) =>
+                prev.includes("Red")
+                  ? prev.filter((item) => item !== "Red")
+                  : [...prev, "Red"]
+              )
+            }
+          >
+            <p
+              className={`${
+                color.includes("Red") ? "bg-pink-100" : "bg-slate-200"
+              } px-3 py-1 cursor-pointer`}
+            >
+              Red
+            </p>
+          </div>
+
+          <div
+            onClick={() =>
+              setColor((prev) =>
+                prev.includes("Blue")
+                  ? prev.filter((item) => item !== "Blue")
+                  : [...prev, "Blue"]
+              )
+            }
+          >
+            <p
+              className={`${
+                color.includes("Blue") ? "bg-pink-100" : "bg-slate-200"
+              } px-3 py-1 cursor-pointer`}
+            >
+              Blue
+            </p>
+          </div>
+
+          <div
+            onClick={() =>
+              setColor((prev) =>
+                prev.includes("Yellow")
+                  ? prev.filter((item) => item !== "Yellow")
+                  : [...prev, "Yellow"]
+              )
+            }
+          >
+            <p
+              className={`${
+                color.includes("Yellow") ? "bg-pink-100" : "bg-slate-200"
+              } px-3 py-1 cursor-pointer`}
+            >
+              Yellow
+            </p>
+          </div>
+        </div>
       </div>
 
       <div className="flex gap-2 mt-2">
