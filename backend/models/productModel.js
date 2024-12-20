@@ -14,7 +14,7 @@ const productSchema = new mongoose.Schema({
     average: { type: Number, default: 0, min: 0, max: 5 },
     count: { type: Number, default: 0 },
   },
-  color: { type: Array, default: [] },
+  color: { type: Array, required: true },
   customId: { type: String },
 });
 
