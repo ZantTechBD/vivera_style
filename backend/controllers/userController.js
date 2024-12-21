@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import userModel from "../models/userModel.js";
 
 const createToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+  return jwt.sign({ id }, process.env.JWT_SECRET);
 };
 
 // Route for user login
@@ -24,7 +24,7 @@ const loginUser = async (req, res) => {
 
     if (isMatch) {
       const token = createToken(user._id);
-      res.json({ success: true, token, user });
+      res.json({ success: true, token});
     } else {
       res.status(401).json({ success: false, message: "Invalid credentials" });
     }
@@ -76,9 +76,12 @@ const registerUser = async (req, res) => {
       shippingAddress,
     });
 
-    const user = await newUser.save();
+    // const user = await newUser.save();
+
+    // const token = createToken(user._id);
 
     const token = createToken(user._id);
+    res.json({ success: true, token })
 
     res.status(201).json({ success: true, token, user });
   } catch (error) {
@@ -96,9 +99,7 @@ const adminLogin = async (req, res) => {
       email === process.env.ADMIN_EMAIL &&
       password === process.env.ADMIN_PASSWORD
     ) {
-      const token = jwt.sign({ email }, process.env.JWT_SECRET, {
-        expiresIn: "7d",
-      });
+      const token = jwt.sign(email+password,process.env.JWT_SECRET);
       res.json({ success: true, token });
     } else {
       res.status(401).json({ success: false, message: "Invalid credentials" });
