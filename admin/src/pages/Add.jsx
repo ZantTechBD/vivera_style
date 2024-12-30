@@ -5,11 +5,6 @@ import { backendUrl } from "../App";
 import { toast } from "react-toastify";
 
 const Add = ({ token }) => {
-  const [customColorList, setCustomColorList] = useState([]);
-  const [customColor, setCustomColor] = useState("");
-  const [customSizeList, setCustomSizeList] = useState([]);
-  const [customSize, setCustomSize] = useState("");
-
   const [image1, setImage1] = useState(false);
   const [image2, setImage2] = useState(false);
   const [image3, setImage3] = useState(false);
@@ -27,6 +22,11 @@ const Add = ({ token }) => {
   const [color, setColor] = useState([]);
   const [customId, setCustomId] = useState("");
   const [rating, setRating] = useState(0);
+
+  const [customColorList, setCustomColorList] = useState([]);
+  const [customColor, setCustomColor] = useState("");
+  const [customSizeList, setCustomSizeList] = useState([]);
+  const [customSize, setCustomSize] = useState("");
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
