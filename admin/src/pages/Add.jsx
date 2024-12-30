@@ -28,6 +28,20 @@ const Add = ({ token }) => {
   const [customSizeList, setCustomSizeList] = useState([]);
   const [customSize, setCustomSize] = useState("");
 
+  const addCustomColor = () => {
+    customColorList.push(customColor);
+    setCustomColorList(customColorList);
+    console.log(customColorList);
+    setCustomColor("");
+  };
+
+  const addCustomSize = () => {
+    customSizeList.push(customSize);
+    setCustomSizeList(customSizeList);
+    console.log(customSizeList);
+    setCustomSize("");
+  };
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
@@ -78,20 +92,6 @@ const Add = ({ token }) => {
       console.log(error);
       toast.error(error.message);
     }
-  };
-
-  const addCustomColor = () => {
-    customColorList.push(customColor);
-    setCustomColorList(customColorList);
-    console.log(customColorList);
-    setCustomColor("");
-  };
-
-  const addCustomSize = () => {
-    customSizeList.push(customSize);
-    setCustomSizeList(customSizeList);
-    console.log(customSizeList);
-    setCustomSize("");
   };
 
   return (
