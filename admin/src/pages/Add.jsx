@@ -5,6 +5,11 @@ import { backendUrl } from "../App";
 import { toast } from "react-toastify";
 
 const Add = ({ token }) => {
+  const [customColorList, setCustomColorList] = useState([]);
+  const [customColor, setCustomColor] = useState("");
+  const [customSizeList, setCustomSizeList] = useState([]);
+  const [customSize, setCustomSize] = useState("");
+
   const [image1, setImage1] = useState(false);
   const [image2, setImage2] = useState(false);
   const [image3, setImage3] = useState(false);
@@ -73,6 +78,20 @@ const Add = ({ token }) => {
       console.log(error);
       toast.error(error.message);
     }
+  };
+
+  const addCustomColor = () => {
+    customColorList.push(customColor);
+    setCustomColorList(customColorList);
+    console.log(customColorList);
+    setCustomColor("");
+  };
+
+  const addCustomSize = () => {
+    customSizeList.push(customSize);
+    setCustomSizeList(customSizeList);
+    console.log(customSizeList);
+    setCustomSize("");
   };
 
   return (
@@ -244,6 +263,47 @@ const Add = ({ token }) => {
       <div>
         <p className="mb-2">Product Sizes</p>
 
+        <div className="mb-3">
+          <input
+            className="px-2"
+            placeholder="Enter Custom Size"
+            value={customSize}
+            onChange={(e) => setCustomSize(e.target.value)}
+          ></input>
+          <button
+            type="button"
+            className="bg-black text-white px-2"
+            onClick={() => addCustomSize()}
+          >
+            Add+
+          </button>
+        </div>
+
+        <div className="flex gap-3 mb-3">
+          {customSizeList.map((sizeText, id) => {
+            return (
+              <div
+                key={id}
+                onClick={() =>
+                  setSizes((prev) =>
+                    prev.includes(sizeText)
+                      ? prev.filter((item) => item !== sizeText)
+                      : [...prev, sizeText]
+                  )
+                }
+              >
+                <p
+                  className={`${
+                    sizes.includes(sizeText) ? "bg-pink-100" : "bg-slate-200"
+                  } px-3 py-1 cursor-pointer`}
+                >
+                  {sizeText}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
         {subCategory != "Leather" && subCategory != "Accessories" ? (
           <div className="flex gap-3">
             <div
@@ -361,6 +421,47 @@ const Add = ({ token }) => {
 
       <div>
         <p className="mb-2">Product Colors</p>
+
+        <div className="mb-3">
+          <input
+            className="px-2"
+            placeholder="Enter Custom Color"
+            value={customColor}
+            onChange={(e) => setCustomColor(e.target.value)}
+          ></input>
+          <button
+            type="button"
+            className="bg-black text-white px-2"
+            onClick={() => addCustomColor()}
+          >
+            Add+
+          </button>
+        </div>
+
+        <div className="flex gap-3 mb-3">
+          {customColorList.map((colorText, id) => {
+            return (
+              <div
+                key={id}
+                onClick={() =>
+                  setColor((prev) =>
+                    prev.includes(colorText)
+                      ? prev.filter((item) => item !== colorText)
+                      : [...prev, colorText]
+                  )
+                }
+              >
+                <p
+                  className={`${
+                    color.includes(colorText) ? "bg-pink-100" : "bg-slate-200"
+                  } px-3 py-1 cursor-pointer`}
+                >
+                  {colorText}
+                </p>
+              </div>
+            );
+          })}
+        </div>
 
         <div className="flex gap-3">
           <div

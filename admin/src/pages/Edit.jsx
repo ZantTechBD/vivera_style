@@ -26,6 +26,11 @@ const Edit = ({ token }) => {
   const [customId, setCustomId] = useState("");
   const [rating, setRating] = useState(0);
 
+  const [customColorList, setCustomColorList] = useState([]);
+  const [customColor, setCustomColor] = useState("");
+  const [customSizeList, setCustomSizeList] = useState([]);
+  const [customSize, setCustomSize] = useState("");
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -120,6 +125,20 @@ const Edit = ({ token }) => {
       console.error("Error updating product:", error);
       toast.error("Error updating product");
     }
+  };
+
+  const addCustomColor = () => {
+    customColorList.push(customColor);
+    setCustomColorList(customColorList);
+    console.log(customColorList);
+    setCustomColor("");
+  };
+
+  const addCustomSize = () => {
+    customSizeList.push(customSize);
+    setCustomSizeList(customSizeList);
+    console.log(customSizeList);
+    setCustomSize("");
   };
 
   return (
@@ -238,6 +257,48 @@ const Edit = ({ token }) => {
 
       <div>
         <p className="mb-2">Product Sizes</p>
+
+        <div className="mb-3">
+          <input
+            className="px-2"
+            placeholder="Enter Custom Size"
+            value={customSize}
+            onChange={(e) => setCustomSize(e.target.value)}
+          ></input>
+          <button
+            type="button"
+            className="bg-black text-white px-2"
+            onClick={() => addCustomSize()}
+          >
+            Add+
+          </button>
+        </div>
+
+        <div className="flex gap-3 mb-3">
+          {customSizeList.map((sizeText, id) => {
+            return (
+              <div
+                key={id}
+                onClick={() =>
+                  setSizes((prev) =>
+                    prev.includes(sizeText)
+                      ? prev.filter((item) => item !== sizeText)
+                      : [...prev, sizeText]
+                  )
+                }
+              >
+                <p
+                  className={`${
+                    sizes.includes(sizeText) ? "bg-pink-100" : "bg-slate-200"
+                  } px-3 py-1 cursor-pointer`}
+                >
+                  {sizeText}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
         <div className="flex gap-3">
           {["S", "M", "L", "XL", "XXL"].map((size) => (
             <div
@@ -264,6 +325,47 @@ const Edit = ({ token }) => {
 
       <div>
         <p className="mb-2">Product Colors</p>
+
+        <div className="mb-3">
+          <input
+            className="px-2"
+            placeholder="Enter Custom Color"
+            value={customColor}
+            onChange={(e) => setCustomColor(e.target.value)}
+          ></input>
+          <button
+            type="button"
+            className="bg-black text-white px-2"
+            onClick={() => addCustomColor()}
+          >
+            Add+
+          </button>
+        </div>
+
+        <div className="flex gap-3 mb-3">
+          {customColorList.map((colorText, id) => {
+            return (
+              <div
+                key={id}
+                onClick={() =>
+                  setColor((prev) =>
+                    prev.includes(colorText)
+                      ? prev.filter((item) => item !== colorText)
+                      : [...prev, colorText]
+                  )
+                }
+              >
+                <p
+                  className={`${
+                    color.includes(colorText) ? "bg-pink-100" : "bg-slate-200"
+                  } px-3 py-1 cursor-pointer`}
+                >
+                  {colorText}
+                </p>
+              </div>
+            );
+          })}
+        </div>
 
         <div className="flex gap-3">
           <div
